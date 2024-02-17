@@ -43,10 +43,9 @@ class MyApp extends StatelessWidget {
           routes: routes(),
           onGenerateRoute: generateRoutes,
           scrollBehavior: const CupertinoScrollBehavior(),
+          debugShowCheckedModeBanner: false,
         );
       },
     );
   }
 }
-
-

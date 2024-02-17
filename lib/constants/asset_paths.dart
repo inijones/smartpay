@@ -8,7 +8,7 @@ class AssetPaths {
   static const deviceImage2 = "assets/images/device2.png";
 
   static const illustrationImage1 = "assets/images/illustration1.svg";
-  static const illustrationImage2 = "assets/images/illustration1.svg";
+  static const illustrationImage2 = "assets/images/illustration2.svg";
 
   // google and apple icons
   static const appleIcon = "assets/icons/apple.svg";

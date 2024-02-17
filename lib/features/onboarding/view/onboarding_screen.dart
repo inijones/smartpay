@@ -1,14 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smartpay/common/components/button.dart';
-import 'package:smartpay/common/components/text_widget.dart';
 import 'package:smartpay/common/utils/navigator.dart';
-import 'package:smartpay/constants/asset_paths.dart';
 import 'package:smartpay/constants/colors.dart';
 import 'package:smartpay/constants/dimensions.dart';
 import 'package:smartpay/features/auth/view/sign_in/sign_in_screen.dart';
-import 'package:smartpay/features/onboarding/component/skipbutton.dart';
+import 'package:smartpay/features/onboarding/view/component/onboarding_pageview.dart';
+import 'package:smartpay/features/onboarding/view/component/skipbutton.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -18,6 +19,36 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  final controller = PageController(initialPage: 0);
+
+  int _currentPage = 0;
+
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+      if (_currentPage < 1) {
+        _currentPage++;
+      } else {
+        _currentPage = 0;
+      }
+
+      controller.animateToPage(
+        _currentPage,
+        duration: const Duration(milliseconds: 350),
+        curve: Curves.easeIn,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer?.cancel();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,97 +61,54 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             // Skip Button
             const SkipButton(),
 
+            SizedBox(height: Dimension.ylenght * 5),
+
             // Ilustration
             SizedBox(
-              height: 650.h,
-              child: Stack(
-                children: [
-                  SizedBox(
-                    width: 292.w,
-                    height: 407.h,
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          top: 10.h,
-                          left: 57.w,
-                          right: 57.w,
-                          child: SizedBox(
-                            width: 202.w,
-                            height: 407.h,
-                            child: Image.asset(
-                              AssetPaths.deviceImage1,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 50.h,
-                          child: SizedBox(
-                            height: 240.h,
-                            width: 292.w,
-                            child: SvgPicture.asset(
-                              AssetPaths.illustrationImage1,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      width: 375.w,
-                      height: 390.h,
-                      decoration: const BoxDecoration(
-                        color: SmartpayColors.scaffoldBackground,
-                      ),
-                      child: Column(
-                        children: [
-                          SizedBox(height: 50.h),
-                          SizedBox(
-                            width: 260.w,
-                            height: 62.h,
-                            child: TextWidget(
-                              text: "Finance app the safest and most trusted",
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.w600,
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                            ),
-                          ),
-                          SizedBox(height: 20.h),
-                          SizedBox(
-                            width: 260.w,
-                            height: 62.h,
-                            child: TextWidget(
-                              text:
-                                  "Your finance work starts here. Our here to help you track and deal with speeding up your transactions.",
-                              fontSize: 14.sp,
-                              textColor: SmartpayColors.greyColor,
-                              fontWeight: FontWeight.w400,
-                              textAlign: TextAlign.center,
-                              maxLines: 3,
-                            ),
-                          ),
-                          SizedBox(height: 50.h),
-                          AppButton(
-                            onClick: () => navigate(
-                              context,
-                              const SignInScreen(),
-                            ),
-                            text: "Get Started",
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
+              height: 500.h,
+              child: OnboardingPageView(
+                controller: controller,
               ),
             ),
-            // Image.asset(AssetPaths.deviceImage2),
+
+            IndicatorWidget(controller: controller),
+
+            SizedBox(height: Dimension.ylenght * 5),
+
+            AppButton(
+              onClick: () => navigate(
+                context,
+                const SignInScreen(),
+              ),
+              text: "Get Started",
+            ),
           ],
         ),
+      ),
+      // Image.asset(AssetPaths.deviceImage2),
+    );
+  }
+}
+
+// Indicator Widget
+class IndicatorWidget extends StatelessWidget {
+  const IndicatorWidget({
+    super.key,
+    required this.controller,
+  });
+
+  final PageController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return SmoothPageIndicator(
+      controller: controller,
+      count: 2,
+      effect: ExpandingDotsEffect(
+        activeDotColor: SmartpayColors.blackColor,
+        dotColor: SmartpayColors.greyColor,
+        dotHeight: 8.h,
+        dotWidth: 8.h,
       ),
     );
   }
