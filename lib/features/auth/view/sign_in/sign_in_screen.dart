@@ -8,8 +8,8 @@ import 'package:smartpay/common/utils/navigator.dart';
 import 'package:smartpay/constants/asset_paths.dart';
 import 'package:smartpay/constants/colors.dart';
 import 'package:smartpay/constants/dimensions.dart';
-import 'package:smartpay/features/auth/password_recovery/view/recovery_email_screen.dart';
-import 'package:smartpay/features/auth/sign_up/view/sign_up_email_screen.dart';
+import 'package:smartpay/features/auth/view/password_recovery/recovery_email_screen.dart';
+import 'package:smartpay/features/auth/view/sign_up/sign_up_email_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});

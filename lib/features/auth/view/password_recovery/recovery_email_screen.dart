@@ -6,7 +6,7 @@ import 'package:smartpay/common/utils/navigator.dart';
 import 'package:smartpay/constants/asset_paths.dart';
 import 'package:smartpay/constants/colors.dart';
 import 'package:smartpay/constants/dimensions.dart';
-import 'package:smartpay/features/auth/password_recovery/view/verify_identity_screen.dart';
+import 'package:smartpay/features/auth/view/password_recovery/verify_identity_screen.dart';
 
 class RecoveryEmailScreen extends StatefulWidget {
   const RecoveryEmailScreen({super.key});

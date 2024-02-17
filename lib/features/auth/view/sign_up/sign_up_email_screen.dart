@@ -8,8 +8,8 @@ import 'package:smartpay/common/utils/navigator.dart';
 import 'package:smartpay/constants/asset_paths.dart';
 import 'package:smartpay/constants/colors.dart';
 import 'package:smartpay/constants/dimensions.dart';
-import 'package:smartpay/features/auth/sign_in/view/sign_in_screen.dart';
-import 'package:smartpay/features/auth/sign_up/view/otp_auth_screen.dart';
+import 'package:smartpay/features/auth/view/sign_in/sign_in_screen.dart';
+import 'package:smartpay/features/auth/view/sign_up/otp_auth_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

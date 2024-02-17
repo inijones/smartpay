@@ -7,7 +7,7 @@ import 'package:smartpay/common/utils/navigator.dart';
 import 'package:smartpay/constants/asset_paths.dart';
 import 'package:smartpay/constants/colors.dart';
 import 'package:smartpay/constants/dimensions.dart';
-import 'package:smartpay/features/auth/password_recovery/view/create_new_password_screen.dart';
+import 'package:smartpay/features/auth/view/password_recovery/create_new_password_screen.dart';
 
 class VerifyIdentityScreen extends StatefulWidget {
   const VerifyIdentityScreen({super.key});

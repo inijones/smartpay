@@ -7,7 +7,7 @@ import 'package:smartpay/common/utils/navigator.dart';
 import 'package:smartpay/constants/asset_paths.dart';
 import 'package:smartpay/constants/colors.dart';
 import 'package:smartpay/constants/dimensions.dart';
-import 'package:smartpay/features/auth/sign_in/view/sign_in_screen.dart';
+import 'package:smartpay/features/auth/view/sign_in/sign_in_screen.dart';
 import 'package:smartpay/features/onboarding/component/skipbutton.dart';
 
 class OnboardingScreen extends StatefulWidget {

@@ -22,6 +22,7 @@ class PinOTPFieldWidget extends StatefulWidget {
     this.obscureText,
     this.cursorColor,
     this.selecedColor,
+    this.shape
   });
 
   final double? width;
@@ -45,6 +46,8 @@ class PinOTPFieldWidget extends StatefulWidget {
 
   final Color? cursorColor;
   final Color? selecedColor;
+
+  final PinCodeFieldShape? shape;
 
   @override
   State<PinOTPFieldWidget> createState() => _PinOTPFieldWidgetState();
@@ -70,7 +73,7 @@ class _PinOTPFieldWidgetState extends State<PinOTPFieldWidget> {
           fontWeight: FontWeight.w700,
         ),
         pinTheme: PinTheme(
-          shape: PinCodeFieldShape.box,
+          shape: widget.shape ?? PinCodeFieldShape.box,
           borderWidth: 2.h,
           borderRadius: BorderRadius.all(
             Radius.circular(widget.borderRadius ?? 16.r),
