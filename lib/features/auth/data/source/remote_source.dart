@@ -7,14 +7,13 @@ import 'package:smartpay/core/network_request/network_request.dart';
 import 'package:smartpay/core/network_retry/network_retry.dart';
 import 'package:smartpay/features/auth/model/register_item.dart';
 import 'package:smartpay/features/auth/model/response_model.dart';
-import 'package:smartpay/features/auth/model/user.dart';
-
 
 abstract class AuthRemoteDataSource {
   // Auth
-  Future<User> register({required RegisterItem registerItem});
-  Future<User> login(String email, String pin);
- 
+  Future<ResponseModel> register({required RegisterItem registerItem});
+  Future<ResponseModel> login(String email, String pin);
+  Future<ResponseModel> getEmailToken(String email);
+  Future<ResponseModel> verifyEmailToken(String email, String token);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -35,7 +34,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   //
   @override
-  Future<User> register({required RegisterItem registerItem}) async {
+  Future<ResponseModel> register({required RegisterItem registerItem}) async {
     String url = Endpoint.register; //The API URL CALL
 
     final body = {
@@ -59,7 +58,53 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
     if (response.statusCode == 200) {
       try {
-        final User user = User.fromJson(data["data"]);
+        final ResponseModel responseModel =
+            ResponseModel.fromJson(data["data"]);
+
+        return responseModel;
+      } on Exception catch (_) {
+        rethrow;
+      }
+    } else {
+      final ResponseModel responseModel = ResponseModel.fromJson(data);
+
+      try {
+        if (responseModel.status == false) {
+          throw Exception(data['message']);
+        } else {
+          final errorMessage = data['message'];
+          throw Exception(errorMessage);
+        }
+      } on Exception catch (_) {
+        rethrow;
+      }
+    }
+  }
+
+  @override
+  Future<ResponseModel> login(String email, String password) async {
+    String url = Endpoint.login; //The API URL CALL
+
+    final body = {
+      "email": email,
+      "password": password,
+      "device_name": "mobile"
+    };
+
+    final response = await networkRetry.networkRetry(
+      () => networkRequest.post(
+        url,
+        body: body,
+      ),
+    );
+
+    debugPrint(response.body);
+
+    final data = await json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      try {
+        final ResponseModel user = ResponseModel.fromJson(data["data"]);
 
         return user;
       } on Exception catch (_) {
@@ -82,12 +127,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<User> login(String email, String pin) async {
-    String url = Endpoint.login; //The API URL CALL
+  Future<ResponseModel> getEmailToken(String email) async {
+    String url = Endpoint.getEmailToken; //The API URL CALL
 
     final body = {
       "email": email,
-      "pin": pin,
     };
 
     final response = await networkRetry.networkRetry(
@@ -103,9 +147,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
     if (response.statusCode == 200) {
       try {
-        final User user = User.fromJson(data["data"]);
+        final ResponseModel responseModel =
+            ResponseModel.fromJson(data["data"]);
 
-        return user;
+        return responseModel;
       } on Exception catch (_) {
         rethrow;
       }
@@ -125,4 +170,48 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     }
   }
 
+  @override
+  Future<ResponseModel> verifyEmailToken(String email, String token) async {
+    String url = Endpoint.login; //The API URL CALL
+
+    final body = {
+      "email": email,
+      "pin": token,
+    };
+
+    final response = await networkRetry.networkRetry(
+      () => networkRequest.post(
+        url,
+        body: body,
+      ),
+    );
+
+    debugPrint(response.body);
+
+    final data = await json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      try {
+        final ResponseModel responseModel =
+            ResponseModel.fromJson(data["data"]);
+
+        return responseModel;
+      } on Exception catch (_) {
+        rethrow;
+      }
+    } else {
+      final ResponseModel responseModel = ResponseModel.fromJson(data);
+
+      try {
+        if (responseModel.status == false) {
+          throw Exception(data['message']);
+        } else {
+          final errorMessage = data['message'];
+          throw Exception(errorMessage);
+        }
+      } on Exception catch (_) {
+        rethrow;
+      }
+    }
+  }
 }

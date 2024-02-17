@@ -22,7 +22,11 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(AssetPaths.thumbsUpIcon),
+            Image.asset(
+              AssetPaths.thumbsUpIcon,
+              height: 135.h,
+              width: 140.w,
+            ),
 
             SizedBox(height: Dimension.xlenght * 4),
 

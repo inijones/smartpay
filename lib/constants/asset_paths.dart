@@ -26,5 +26,9 @@ class AssetPaths {
   static const messageIcon = "assets/icons/message_icon.svg";
 
   // thumbs up icon
-  static const thumbsUpIcon = "assets/icons/thumbs_up_icon.svg";
+  static const thumbsUpIcon = "assets/icons/thumbs_up_icon.png";
+
+  // Hidden Password
+  static const hidePasswordIcon = "assets/icons/hide.svg";
+  static const showPasswordIcon = "assets/icons/show.svg";
 }

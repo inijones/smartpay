@@ -102,7 +102,7 @@ class AppLoadingButton extends StatelessWidget {
         height: height ?? 56.h,
         width: width ?? 330.w,
         decoration: BoxDecoration(
-          color: SmartpayColors.buttonPurple,
+          color: SmartpayColors.blackColor,
           borderRadius: BorderRadius.circular(8.0.r),
         ),
         child: InkWell(
@@ -113,7 +113,7 @@ class AppLoadingButton extends StatelessWidget {
               height: 30.h,
               width: 30.w,
               child: const LoadingIndicator(
-                indicatorType: Indicator.semiCircleSpin,
+                indicatorType: Indicator.ballRotate,
                 colors: [
                   Colors.white,
                 ],
@@ -138,7 +138,7 @@ class AppOutlinedButton extends StatelessWidget {
     super.key,
     this.onPressed,
     this.child,
-     this.text,
+    this.text,
     this.width,
     this.height,
   });

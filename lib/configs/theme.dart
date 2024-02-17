@@ -27,7 +27,7 @@ ThemeData theme() {
     //   TargetPlatform.android: CupertinoPageTransitionsBuilder(),
     //   TargetPlatform.iOS: CupertinoPageTransitionsBuilder()
     // }),
-    fontFamily: 'DM Sans',
+    fontFamily: 'SFProDisplay',
     appBarTheme: const AppBarTheme(
       backgroundColor: SmartpayColors.scaffoldBackground,
       elevation: 0,
@@ -44,17 +44,17 @@ ThemeData theme() {
     inputDecorationTheme: InputDecorationTheme(
       hintStyle: TextStyle(
         color: SmartpayColors.greyColor,
-        fontFamily: 'DM Sans',
+        fontFamily: 'SFProDisplay',
         fontSize: 14.sp,
         fontWeight: FontWeight.w400,
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           width: 1,
-          color: SmartpayColors.greyColor,
+          color: SmartpayColors.greyColor.withOpacity(0.2),
         ),
         borderRadius: BorderRadius.all(
-          Radius.circular(8.r),
+          Radius.circular(16.r),
         ),
       ),
     ),

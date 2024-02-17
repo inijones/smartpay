@@ -84,9 +84,9 @@ class TextFieldBox extends StatelessWidget {
         onEditingComplete: onEditingComplete,
         style: TextStyle(
           fontFamily: 'SFProDisplay',
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w600,
           fontSize: fontSize ?? 16.h,
-          color: textColor ?? SmartpayColors.greyColor,
+          color: textColor ?? SmartpayColors.blackColor,
           decoration: TextDecoration.none,
         ),
         obscureText: obscureText ?? false,
@@ -105,15 +105,15 @@ class TextFieldBox extends StatelessWidget {
               width: 2,
             ),
             borderRadius: BorderRadius.all(
-              Radius.circular(12.r),
+              Radius.circular(16.r),
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: SmartpayColors.greyColor,
+              color: SmartpayColors.primaryColor,
             ),
             borderRadius: BorderRadius.all(
-              Radius.circular(12.r),
+              Radius.circular(16.r),
             ),
           ),
           errorBorder: OutlineInputBorder(
